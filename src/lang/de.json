@@ -1,0 +1,15 @@
+{
+  "stickynades.prefix": "{lime}[StickyNades]{default}",
+
+  "stickynades.stuck.all": "{green}{0}{default} hat {red}{1}{default} eine Klebegranate angeheftet!",
+  "stickynades.stuck.thrower": "Du hast {red}{0}{default} eine Klebegranate angeheftet!",
+  "stickynades.stuck.victim": "{green}{0}{default} hat dir eine Klebegranate angeheftet!",
+
+  "stickynades.toggle.on": "Klebegranaten sind jetzt {green}aktiviert{default}.",
+  "stickynades.toggle.off": "Klebegranaten sind jetzt {red}deaktiviert{default}.",
+  "stickynades.toggle.everyone": "Klebegranaten sind auf diesem Server für alle aktiviert.",
+  "stickynades.toggle.disabled": "Klebegranaten sind auf diesem Server deaktiviert.",
+
+  "stickynades.command.no-permission": "{red}Du hast keine Berechtigung, diesen Befehl zu verwenden.",
+  "stickynades.command.client-only": "Dieser Befehl kann nur von Spielern verwendet werden."
+}

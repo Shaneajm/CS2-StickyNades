@@ -1,0 +1,15 @@
+{
+  "stickynades.prefix": "{lime}[StickyNades]{default}",
+
+  "stickynades.stuck.all": "{green}{0}{default} stuck {red}{1}{default} with a sticky nade!",
+  "stickynades.stuck.thrower": "You stuck {red}{0}{default} with a sticky nade!",
+  "stickynades.stuck.victim": "{green}{0}{default} stuck you with a sticky nade!",
+
+  "stickynades.toggle.on": "Sticky nades are now {green}on{default}.",
+  "stickynades.toggle.off": "Sticky nades are now {red}off{default}.",
+  "stickynades.toggle.everyone": "Sticky nades are on for everyone on this server.",
+  "stickynades.toggle.disabled": "Sticky nades are disabled on this server.",
+
+  "stickynades.command.no-permission": "{red}You do not have permission to use this command.",
+  "stickynades.command.client-only": "This command can only be used by players."
+}
