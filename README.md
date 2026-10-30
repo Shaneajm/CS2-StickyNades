@@ -1,7 +1,11 @@
+![GitHub Repo stars](https://img.shields.io/github/stars/Shaneajm/CS2-StickyNades?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/Shaneajm/CS2-StickyNades/total?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/Shaneajm/CS2-StickyNades?style=for-the-badge)
+
 <br />
 <div align="center">
   <h1 align="center">StickyNades</h1>
-  <p align="center">A <a href="https://docs.cssharp.dev">CounterStrikeSharp</a> plugin for CS2 that makes HE grenades stick to the first thing they hit.</p>
+  <p align="center">A <a href="https://docs.cssharp.dev">CounterStrikeSharp</a> plugin for CS2 that makes HE grenades sticky.</p>
 </div>
 
 ## Features
@@ -59,10 +63,10 @@ The default config:
 
 ## Commands
 
-| Command        | Description                                                                                                                        |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `!sticky`      | Turns sticky grenades on or off for yourself. Only works in `PerPlayer` mode. In `Everyone` mode it tells you they're on for everyone. |
-| `!stickynades` | Same as `!sticky`.                                                                                                                 |
+| Command        | Description                                                                   |
+| -------------- | ----------------------------------------------------------------------------- |
+| `!sticky`      | Turns sticky grenades on or off for yourself. Only works in `PerPlayer` mode. |
+| `!stickynades` | Same as `!sticky`.                                                            |
 
 Change the command names with the `ToggleCommands` option. The setting resets when the player disconnects.
 

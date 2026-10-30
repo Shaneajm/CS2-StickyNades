@@ -1,0 +1,73 @@
+name: Build and Publish Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Extract version
+        id: extract_info
+        run: |
+          version=$(grep -oP 'ModuleVersion => "\K[^"]+' src/StickyNades.cs)
+          if [ -z "$version" ]; then
+            echo "Could not read ModuleVersion from src/StickyNades.cs" >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Set new tag
+        id: set_tag
+        env:
+          VERSION: ${{ steps.extract_info.outputs.version }}
+        run: |
+          base_tag="v$VERSION"
+          new_tag="$base_tag"
+          count=1
+          while git rev-parse -q --verify "refs/tags/$new_tag" > /dev/null; do
+            new_tag="$base_tag-$count"
+            count=$((count + 1))
+          done
+          echo "New tag: $new_tag"
+          echo "new_tag=$new_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Build Project
+        run: dotnet build src/StickyNades.csproj --configuration Release
+
+      - name: Zip Plugin
+        env:
+          NEW_TAG: ${{ steps.set_tag.outputs.new_tag }}
+        run: |
+          plugin_dir=package/addons/counterstrikesharp/plugins/StickyNades
+          mkdir -p "$plugin_dir"
+          cp -r src/bin/Release/net10.0/StickyNades.dll \
+                src/bin/Release/net10.0/StickyNades.pdb \
+                src/bin/Release/net10.0/StickyNades.deps.json \
+                src/bin/Release/net10.0/lang \
+                "$plugin_dir/"
+          cd package
+          zip -r "../StickyNades-$NEW_TAG.zip" addons
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEW_TAG: ${{ steps.set_tag.outputs.new_tag }}
+        run: |
+          gh release create "$NEW_TAG" "StickyNades-$NEW_TAG.zip" \
+            --target "$GITHUB_SHA" \
+            --title "StickyNades $NEW_TAG" \
+            --generate-notes
