@@ -44,19 +44,23 @@ After editing it, run `css_plugins reload StickyNades` or change the map.
 | `ToggleCommands`          | Command names that toggle sticky grenades. `"sticky"` gives `!sticky`, `/sticky` and `css_sticky`.                                                 | `["sticky", "stickynades"]` |
 | `TogglePermission`        | Permission needed to use the toggle command, such as `"@css/vip"`. Leave empty to let anyone use it.                                               | `""`                        |
 | `ChatMessages`            | Who sees the stuck message: `All` (everyone), `Involved` (thrower and stuck player), `Thrower` (thrower only) or `None`.                            | `"All"`                     |
+| `MessageLocation`         | Where the stuck message is shown: `Chat`, `Center` (center screen HTML) or `Both`.                                                                 | `"Chat"`                    |
+| `CenterMessageDuration`   | How many seconds the center message stays on screen when `MessageLocation` is `Center` or `Both`.                                                  | `3.0`                       |
 | `StickToTeammates`        | When `false`, grenades bounce off teammates as usual and stick to the next thing they hit. Has no effect when `mp_teammates_are_enemies` is on.     | `true`                      |
 
 The default config:
 
 ```json
 {
-  "ConfigVersion": 1,
+  "ConfigVersion": 2,
   "Enabled": true,
   "Mode": "Everyone",
   "PerPlayerDefaultEnabled": false,
   "ToggleCommands": ["sticky", "stickynades"],
   "TogglePermission": "",
   "ChatMessages": "All",
+  "MessageLocation": "Chat",
+  "CenterMessageDuration": 3.0,
   "StickToTeammates": true
 }
 ```

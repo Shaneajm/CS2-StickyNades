@@ -11,7 +11,9 @@ public partial class StickyNades
 
     // Extra padding around player boxes so grazing hits (head, neck, shoulders)
     // still count as a hit before the engine bounces the grenade off.
-    private const float PlayerHitPadding = 4.0f;
+    private const float PlayerHitPadding = 1.0f;
+
+    private const float PlayerBoxHorizontalInset = 4.0f;
 
     // Half-size of the grenade used when its collision bounds aren't available.
     private const float DefaultNadeHalfExtent = 2.0f;
@@ -231,9 +233,11 @@ public partial class StickyNades
         var mins = collision?.Mins is { } cmin && cmin.Length() > 0 ? cmin : new Vector(-16, -16, 0);
         var maxs = collision?.Maxs is { } cmax && cmax.Length() > 0 ? cmax : new Vector(16, 16, 72);
 
+        var horizontal = padding - PlayerBoxHorizontalInset;
+
         return (
-            new Vector(origin.X + mins.X - padding, origin.Y + mins.Y - padding, origin.Z + mins.Z - padding),
-            new Vector(origin.X + maxs.X + padding, origin.Y + maxs.Y + padding, origin.Z + maxs.Z + padding));
+            new Vector(origin.X + mins.X - horizontal, origin.Y + mins.Y - horizontal, origin.Z + mins.Z - padding),
+            new Vector(origin.X + maxs.X + horizontal, origin.Y + maxs.Y + horizontal, origin.Z + maxs.Z + padding));
     }
 
     private static float GetNadeHalfExtent(CHEGrenadeProjectile nade)

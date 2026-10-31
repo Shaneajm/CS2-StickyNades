@@ -8,7 +8,7 @@ namespace StickyNades;
 public partial class StickyNades : BasePlugin, IPluginConfig<StickyNadesConfig>
 {
     public override string ModuleName => "StickyNades";
-    public override string ModuleVersion => "1.0.0";
+    public override string ModuleVersion => "1.0.1";
     public override string ModuleAuthor => "shaneajm";
     public override string ModuleDescription => "HE grenades stick to the first surface or player they hit.";
 
@@ -44,7 +44,12 @@ public partial class StickyNades : BasePlugin, IPluginConfig<StickyNadesConfig>
 
         RegisterListener<Listeners.OnEntitySpawned>(OnEntitySpawned);
         RegisterListener<Listeners.OnTick>(OnTick);
-        RegisterListener<Listeners.OnMapStart>(_ => _nades.Clear());
+        RegisterListener<Listeners.OnTick>(UpdateCenterMessages);
+        RegisterListener<Listeners.OnMapStart>(_ =>
+        {
+            _nades.Clear();
+            _centerMessages.Clear();
+        });
         RegisterEventHandler<EventRoundStart>((_, _) =>
         {
             _nades.Clear();

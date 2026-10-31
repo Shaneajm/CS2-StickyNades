@@ -19,10 +19,18 @@ public enum ChatMessageMode
     None,
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum MessageLocation
+{
+    Chat,
+    Center,
+    Both,
+}
+
 public sealed class StickyNadesConfig : BasePluginConfig
 {
     [JsonPropertyName("ConfigVersion")]
-    public override int Version { get; set; } = 1;
+    public override int Version { get; set; } = 2;
 
     [JsonPropertyName("Enabled")]
     public bool Enabled { get; set; } = true;
@@ -41,6 +49,12 @@ public sealed class StickyNadesConfig : BasePluginConfig
 
     [JsonPropertyName("ChatMessages")]
     public ChatMessageMode ChatMessages { get; set; } = ChatMessageMode.All;
+
+    [JsonPropertyName("MessageLocation")]
+    public MessageLocation MessageLocation { get; set; } = MessageLocation.Chat;
+
+    [JsonPropertyName("CenterMessageDuration")]
+    public float CenterMessageDuration { get; set; } = 3.0f;
 
     [JsonPropertyName("StickToTeammates")]
     public bool StickToTeammates { get; set; } = true;
